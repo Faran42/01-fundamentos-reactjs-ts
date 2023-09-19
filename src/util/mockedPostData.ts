@@ -1,4 +1,10 @@
-export const posts = [
+import { Post } from "../components/Post";
+
+interface PostsProps extends Post {
+  id: number;
+}
+
+export const posts: PostsProps[] = [
   {
     id: 1,
     author: {

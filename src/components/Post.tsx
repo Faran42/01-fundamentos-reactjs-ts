@@ -18,15 +18,20 @@ interface Content {
   content: string
 }
 
-interface PostProps {
+export interface Post {
   author: Author;
   publishedAt: Date;
   content: Content[];
 }
 
-export function Post({ author, content, publishedAt }: PostProps) {
+interface PostProps {
+  post: Post;
+}
+
+export function Post({ post }: PostProps) {
   const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
   const [newCommentText, setNewCommentText] = useState<string[]>([""]);
+  const { author, content, publishedAt } = post;
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -69,7 +74,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} />
+          <Avatar src={post.author.avatarUrl} />
           <div className={styles.authorInfo}>
             <strong>{author.name}</strong>
             <span>{author.role}</span>
